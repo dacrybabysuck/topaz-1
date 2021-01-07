@@ -51,10 +51,10 @@ function getPower(target)
     if player_rank == 10 then
         regen_power = 5
         refresh_power = 5
-    elseif player_rank >= 7 then
+    elseif player_rank >= 8 then
         regen_power = 4
         refresh_power = 4
-    elseif player_rank >= 5 then
+    elseif player_rank >= 6 then
         regen_power = 3
         refresh_power = 3
     elseif player_rank >= 3 then

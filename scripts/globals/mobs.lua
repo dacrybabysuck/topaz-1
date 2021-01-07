@@ -10,6 +10,7 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/npc_util")
 require("scripts/globals/roe")
+require("scripts/globals/settings")
 -----------------------------------
 
 tpz = tpz or {}
@@ -62,6 +63,8 @@ end
 -- potential lottery placeholder was killed
 tpz.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
+
+    if DISABLE_LOTTERY_NM_SYSTEM == 1 then return false end
 
     if NM_LOTTERY_CHANCE then
         chance = NM_LOTTERY_CHANCE >= 0 and (chance * NM_LOTTERY_CHANCE) or 100

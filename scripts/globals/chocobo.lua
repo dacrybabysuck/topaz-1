@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/globals/settings")
 -----------------------------------
 
 tpz = tpz or {}
@@ -91,7 +92,7 @@ tpz.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
     local info   = chocoboInfo[zoneId]
 
     if info then
-        if player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) and mLvl >= info.levelReq and (player:hasCompletedMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past) then
+        if player:hasKeyItem(tpz.ki.CHOCOBO_LICENSE) and mLvl >= info.levelReq and (player:hasCompletedMission(WOTG, tpz.mission.id.wotg.BACK_TO_THE_BEGINNING) or not info.past) or ALWAYS_ALLOW_CHOCOBO_RENTAL == 1 then
             local price = getPrice(zoneId, info)
             player:setLocalVar("[CHOCOBO]price", price)
 
@@ -103,6 +104,10 @@ tpz.chocobo.renterOnTrigger = function(player, eventSucceed, eventFail)
             end
 
             local lowLevel = (mLvl < 20) and 1 or 0
+
+            if ALWAYS_ALLOW_CHOCOBO_RENTAL == 1 then
+                lowLevel = 20
+            end
 
             player:startEvent(eventSucceed, price, currency, lowLevel)
         else

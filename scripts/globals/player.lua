@@ -67,7 +67,7 @@ local function CharCreate(player)
     player:addKeyItem(nationInfo.map)
 
     -- add nation- and race-specific ring
-    if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) then
+    if nation == raceInfo.homeNation and not player:hasItem(nationInfo.ring) or ALWAYS_GRANT_NATION_RING == 1 then
         player:addItem(nationInfo.ring)
     end
 
@@ -120,6 +120,10 @@ local function CharCreate(player)
 
     if player:getGil() < START_GIL then
        player:setGil(START_GIL)
+    end
+
+    if STARTING_WARP_RING == 1 then
+        player:addItem(28540) -- warp ring
     end
 
     player:addItem(536) -- adventurer coupon

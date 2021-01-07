@@ -1489,6 +1489,10 @@ int32 map_config_read(const int8* cfgName)
         {
             map_config.daily_tally_limit = atoi(w2);
         }
+        else if (strcmp(w1, "blue_spell_learn_chance") == 0)
+        {
+            map_config.blue_spell_learn_chance = atoi(w2);
+        }
         else
         {
             ShowWarning(CL_YELLOW "Unknown setting '%s' in file %s\n" CL_RESET, w1, cfgName);

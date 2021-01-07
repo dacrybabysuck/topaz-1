@@ -46,10 +46,10 @@ function onEffectTick(target, effect)
         if not(target:hasStatusEffect(tpz.effect.DISEASE)) and target:hasStatusEffect(tpz.effect.PLAGUE) == false and target:hasStatusEffect(tpz.effect.CURSE_II) == false then
             local healHP = 0
             if target:getContinentID() == 1 and target:hasStatusEffect(tpz.effect.SIGNET) then
-                healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(tpz.mod.HPHEAL)
+                healHP = 50 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(tpz.mod.HPHEAL)
             else
                 target:addTP(HEALING_TP_CHANGE)
-                healHP = 10 + (healtime - 2) + target:getMod(tpz.mod.HPHEAL)
+                healHP = 50 + (healtime - 2) + target:getMod(tpz.mod.HPHEAL)
             end
 
             -- Records of Eminence: Heal Without Using Magic
@@ -64,7 +64,7 @@ function onEffectTick(target, effect)
 
             target:addHP(healHP)
             target:updateEnmityFromCure(target, healHP)
-            target:addMP(12 + ((healtime - 2) * (1 + target:getMod(tpz.mod.CLEAR_MIND))) + target:getMod(tpz.mod.MPHEAL))
+            target:addMP(52 + ((healtime - 2) * (1 + target:getMod(tpz.mod.CLEAR_MIND))) + target:getMod(tpz.mod.MPHEAL))
         end
     end
 end

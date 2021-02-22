@@ -4,7 +4,7 @@ UPDATE mob_groups SET spawntype=0,respawntime=331 WHERE spawntype=32;
 --Makes seven sin skulls auto spawn vs triggered.
 UPDATE mob_groups SET spawntype=0,respawntime=332 WHERE zoneid=195 AND name like 'Skull_of_%';
 
---Add spawn points for the seven sin skills
+--Add spawn points for the seven sin skulls
 UPDATE mob_spawn_points SET pos_x = 18.76, pos_y = -15.95, pos_z = 338.54 WHERE mobid = 17575938; --Skull_of_Gluttony
 UPDATE mob_spawn_points SET pos_x = 139.54, pos_y = -15.95, pos_z = 303.24 WHERE mobid = 17575939; --Skull_of_Greed
 UPDATE mob_spawn_points SET pos_x = -190.88, pos_y = 0.08, pos_z = 59.2 WHERE mobid = 17575940; --Skull_of_Sloth

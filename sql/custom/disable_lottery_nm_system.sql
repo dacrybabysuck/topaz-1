@@ -1,6 +1,18 @@
 --Removes lottery spawn mechanic, sets all to normal spawntype and 5mins 31secs respawn.
 UPDATE mob_groups SET spawntype=0,respawntime=331 WHERE spawntype=32;
 
+--Makes seven sin skulls auto spawn vs triggered.
+UPDATE mob_groups SET spawntype=0,respawntime=332 WHERE zoneid=195 AND name like 'Skull_of_%';
+
+--Add spawn points for the seven sin skulls
+UPDATE mob_spawn_points SET pos_x = 18.76, pos_y = -15.95, pos_z = 338.54 WHERE mobid = 17575938; --Skull_of_Gluttony
+UPDATE mob_spawn_points SET pos_x = 139.54, pos_y = -15.95, pos_z = 303.24 WHERE mobid = 17575939; --Skull_of_Greed
+UPDATE mob_spawn_points SET pos_x = -190.88, pos_y = 0.08, pos_z = 59.2 WHERE mobid = 17575940; --Skull_of_Sloth
+UPDATE mob_spawn_points SET pos_x = 101.96, pos_y = 8.1, pos_z = -100.44 WHERE mobid = 17575941; --Skull_of_Lust
+UPDATE mob_spawn_points SET pos_x = 380.48, pos_y = -31.93, pos_z = -368.66 WHERE mobid = 17575942; --Skull_of_Pride
+UPDATE mob_spawn_points SET pos_x = -658.65, pos_y = -0.01, pos_z = 211.03 WHERE mobid = 17575943; --Skull_of_Envy
+UPDATE mob_spawn_points SET pos_x = -349.85, pos_y = 0.05, pos_z = 339.25 WHERE mobid = 17575944; --Skull_of_Wrath
+
 --Remove duplicate spawn points to make sure only 1 instance of each NM will spawn.
 DELETE FROM mob_spawn_points WHERE mobid = 16822423 AND mobname = "Bugbear_Strongman";
 DELETE FROM mob_spawn_points WHERE mobid = 16826510 AND mobname = "Swashstox_Beadblinker";

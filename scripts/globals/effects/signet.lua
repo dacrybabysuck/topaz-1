@@ -1,7 +1,5 @@
 -----------------------------------
---
---     tpz.effect.SIGNET
---
+-- tpz.effect.SIGNET
 --   Signet is a a beneficial Status Effect that allows the acquisition of Conquest Points and Crystals
 --   from defeated enemies that grant Experience Points.
 
@@ -12,8 +10,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
+local effect_object = {}
 
-function onEffectGain(target, effect)
+effect_object.onEffectGain = function(target, effect)
     target:addLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.DEF, 15)
     target:addLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.EVA, 15)
 
@@ -27,10 +26,10 @@ function onEffectGain(target, effect)
 
 end
 
-function onEffectTick(target, effect)
+effect_object.onEffectTick = function(target, effect)
 end
 
-function onEffectLose(target, effect)
+effect_object.onEffectLose = function(target, effect)
     target:delLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.DEF, 15)
     target:delLatent(tpz.latent.SIGNET_BONUS, 0, tpz.mod.EVA, 15)
 
@@ -68,3 +67,5 @@ function getPower(target)
     return {regen_power, refresh_power}
 
 end
+
+return effect_object

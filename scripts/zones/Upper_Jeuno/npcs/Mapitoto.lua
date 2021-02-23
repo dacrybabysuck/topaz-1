@@ -11,8 +11,9 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
+local entity = {}
 
-function onTrade(player,npc,trade)
+entity.onTrade = function(player,npc,trade)
     if
         player:hasKeyItem(tpz.ki.TRAINERS_WHISTLE) and
         trade:getSlotCount() == 1 and
@@ -24,15 +25,15 @@ function onTrade(player,npc,trade)
         if item == 15533 then
             player:startEvent(10227, 15533, tpz.ki.TRAINERS_WHISTLE, tpz.mount.CHOCOBO)
             player:setLocalVar("FullSpeedAheadReward", tpz.ki.CHOCOBO_COMPANION)
-        elseif mount >= 0 and mount <= 24 then
+        elseif mount >= 0 and mount <= 30 then
             player:setLocalVar("FullSpeedAheadReward", tpz.ki.TIGER_COMPANION + mount)
             player:startEvent(10227, item, tpz.ki.TRAINERS_WHISTLE, tpz.mount.TIGER + mount - 1)
         end
     end
 end
 
-function onTrigger(player,npc)
-    local fsaQuest = player:getQuestStatus(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+entity.onTrigger = function(player,npc)
+    local fsaQuest = player:getQuestStatus(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     local fullSpeedAheadStatus = player:getCharVar("[QUEST]FullSpeedAhead")
 
     if fsaQuest == QUEST_COMPLETED then
@@ -52,20 +53,20 @@ function onTrigger(player,npc)
     end
 end
 
-function onEventUpdate(player, csid, option)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-function onEventFinish(player,csid,option)
+entity.onEventFinish = function(player,csid,option)
     if (csid == 10223 or csid == 10224) and option == 1 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         player:setCharVar("[QUEST]FullSpeedAhead", 1) -- Flag to start minigame
         player:setPos(475, 8.8, -159, 128, 105)
     elseif csid == 10223 and option == 2 then
-        player:addQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:addQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
     elseif csid == 10225 then
         -- Complete quest
         player:setCharVar("[QUEST]FullSpeedAhead", 0)
-        player:completeQuest(JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
+        player:completeQuest(tpz.quest.log_id.JEUNO, tpz.quest.id.jeuno.FULL_SPEED_AHEAD)
         npcUtil.giveKeyItem(player, tpz.ki.TRAINERS_WHISTLE)
         npcUtil.giveKeyItem(player, tpz.ki.RAPTOR_COMPANION)
     elseif csid == 10227 then
@@ -77,3 +78,5 @@ function onEventFinish(player,csid,option)
         npcUtil.giveKeyItem(player, rewardKI)
     end
 end
+
+return entity

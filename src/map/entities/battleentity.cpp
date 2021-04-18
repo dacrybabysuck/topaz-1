@@ -234,6 +234,9 @@ uint8 CBattleEntity::GetSpeed()
     else if (objtype == TYPE_PC || objtype == TYPE_PET)
     {
         bonus = map_config.speed_mod;
+        if (loc.zone->GetType() == ZONE_TYPE::CITY) {
+            bonus += map_config.city_speed_mod;
+        }
     }
 
     int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed + bonus;

@@ -29,8 +29,7 @@ ability_object.onUseAbility = function(player, target, ability)
     else
         ability:setMsg(tpz.msg.basic.NO_EFFECT) -- no effect on player.
     end
-
-    return 1
+    
 end
 
 return ability_object

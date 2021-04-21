@@ -73,7 +73,7 @@ function getPower(target)
         refresh_power = 1
     end
 
-    return {regen_power, refresh_power)
+    return {regen_power, refresh_power}
 
 end
 

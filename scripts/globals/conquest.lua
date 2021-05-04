@@ -614,6 +614,10 @@ local function getArg6(player)
     return player:getRank() + (player:getNation() * 32)
 end
 
+local function getArg6IgnoreNation(player, guardNation)
+    return player:getRank() + (guardNation * 32)
+end
+
 -----------------------------------
 -- (LOCAL) overseer stock
 -----------------------------------
@@ -1023,7 +1027,10 @@ tpz.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, g
         local a6 = getArg6(player)
         local a7 = player:getCP()
         local a8 = getExForceReward(player, guardNation)
-
+        
+        if IGNORE_NATION_FOR_CONQUEST_PURCHASE = 1 then
+            a6 = getArg6IgnoreNation(player,guardNation)
+        
         player:startEvent(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
 
     -- OUTPOST AND BORDER OVERSEERS

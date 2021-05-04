@@ -1030,6 +1030,7 @@ tpz.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, g
         
         if IGNORE_NATION_FOR_CONQUEST_PURCHASE = 1 then
             a6 = getArg6IgnoreNation(player,guardNation)
+        end
         
         player:startEvent(guardEvent, a1, a2, a3, a4, a5, a6, a7, a8)
 

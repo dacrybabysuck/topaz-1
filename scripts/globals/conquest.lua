@@ -1028,7 +1028,7 @@ tpz.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, g
         local a7 = player:getCP()
         local a8 = getExForceReward(player, guardNation)
         
-        if IGNORE_NATION_FOR_CONQUEST_PURCHASE = 1 then
+        if IGNORE_NATION_FOR_CONQUEST_PURCHASE == 1 then
             a6 = getArg6IgnoreNation(player,guardNation)
         end
         

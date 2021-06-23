@@ -2567,13 +2567,15 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 const char* fmtQuery = "INSERT INTO auction_house(itemid, stack, seller, seller_name, date, price) VALUES(%u,%u,%u,'%s',%u,%u)";
 
-                if (Sql_Query(SqlHandle, fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
+                int32 itemCount = PChar->getStorage(LOC_INVENTORY)->GetItem(slot)->getQuantity();
+
+                if (Sql_Query(SqlHandle, fmtQuery, PItem->getID(), itemCount == PItem->getStackSize(), PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
                     ShowError(CL_RED "SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database\n" CL_RESET, PItem->getName());
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // failed to place up
                     return;
                 }
-                charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(quantity != 0 ? 1 : PItem->getStackSize()));
+                charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(itemCount != PItem->getStackSize() ? 1 : PItem->getStackSize())); //quantity != 0 ? 1 : PItem->getStackSize()));
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
 
                 PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0));                 // Merchandise put up on auction msg
